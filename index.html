@@ -126,7 +126,7 @@
                 
                 <section class="switch-part switch-part2">
                     <div class="widget tagcloud" id="js-tagcloud">
-                        <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a>
+                        <a href="/tags/Oracle/" style="font-size: 10px;">Oracle</a> <a href="/tags/css/" style="font-size: 10px;">css</a> <a href="/tags/hexo/" style="font-size: 10px;">hexo</a> <a href="/tags/html/" style="font-size: 10px;">html</a> <a href="/tags/merge-into/" style="font-size: 10px;">merge into</a> <a href="/tags/update-insert/" style="font-size: 10px;">update/insert</a>
                     </div>
                 </section>
                 
@@ -186,11 +186,11 @@
 </nav>
       <div class="body-wrap">
   
-    <article id="post-1" class="article article-type-post" itemscope itemprop="blogPost">
+    <article id="post-2" class="article article-type-post" itemscope itemprop="blogPost">
   
     <div class="article-meta">
-      <a href="/2017/12/07/1/" class="article-date">
-      <time datetime="2017-12-07T10:04:39.961Z" itemprop="datePublished">2017-12-07</time>
+      <a href="/2017/12/11/2/" class="article-date">
+      <time datetime="2017-12-11T07:56:28.929Z" itemprop="datePublished">2017-12-11</time>
 </a>
     </div>
   
@@ -203,7 +203,97 @@
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/07/1/">使用hexo+github免费搭建个人博客网站超详细教程</a>
+      <a class="article-title" href="/2017/12/11/2/">Oracle中Merge into的用法实例讲解</a>
+    </h1>
+  
+
+      </header>
+      
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+          
+        <p>最近在做一个需求，就是涉及到表的问题，前端传过来一条数据，根据主键，查询数据库，如果不存在，那么久插入到数据库中一条，如果存在的话，就是以主键的方式，对数据库中的数据，进行更新。</p>
+<p>拿到这个需求的时候，想的就是直接用if…else…代码进行判断，首先就是查询，查到了记录，就更新，没有查到，就进行数据的直接插入。</p>
+<p>这种方法，本来是没有什么问题的，毕竟都能够完成要求，只是，因为数据库中这张表的记录，实在是太大，通过代码的方式，进行查询判断的话，实在是太消耗时间了，后来查询了一下，这才是找到Oracle数据库的merge into的方法完成。</p>
+<p>首先，来看看merge into的基本语法（Oracle 9i引入的功能）：</p>
+<pre><code>MERGE INTO table_name alias1 
+
+USING (table|view|sub_query) alias2
+
+ON (join condition) 
+
+WHEN MATCHED THEN 
+
+UPDATE table_name 
+
+SET col1 = col_val1, col2 = col_val2 
+
+WHEN NOT MATCHED THEN 
+
+INSERT (column_list) VALUES (column_values);    
+</code></pre><p>可能对于这个语法，不是太了解，那么咱们现在看一个简单的例子：</p>
+<pre><code>merge into Students st using newStudents nst on (st.id = nst.id) 
+
+when matched then 
+
+update set st.name = nst.name 
+
+when not matched then 
+
+insert values(nst.id, nst.name, nst.sex)
+</code></pre><p>这段sql的意思，就是代表着新的学生的id已经存在了数据库中的话，就是 when matched的时候，就执行update操作；when not matched的时候，执行插入操作。</p>
+<p>相比起用代码的判断再执行更新或者插入操作，sql语句的执行，在效率上面来说，无疑是得到了一定的提高，所以使用merge into，还是一个不错的选择。</p>
+<p>因为对数据库，不太熟悉，没有在第一时间，想到这种操作，这次用到了，也算是学习了，记录一下，以后说不定就是会有用到的时候。</p>
+
+      
+      
+    </div>
+    
+    <div class="article-info article-info-index">
+      
+      
+
+      
+    <div class="article-tag tagcloud">
+        <ul class="article-tag-list"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Oracle/">Oracle</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/merge-into/">merge into</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/update-insert/">update/insert</a></li></ul>
+    </div>
+
+      
+      <div class="clearfix"></div>
+    </div>
+    
+  </div>
+  
+</article>
+
+
+
+
+
+
+
+
+
+  
+    <article id="post-1" class="article article-type-post" itemscope itemprop="blogPost">
+  
+    <div class="article-meta">
+      <a href="/2017/12/11/1/" class="article-date">
+      <time datetime="2017-12-11T07:10:23.046Z" itemprop="datePublished">2017-12-11</time>
+</a>
+    </div>
+  
+  <div class="article-inner">
+    
+      <input type="hidden" class="isFancy" />
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/11/1/">使用hexo+github免费搭建个人博客网站超详细教程</a>
     </h1>
   
 
@@ -230,7 +320,7 @@
 
       
         <p class="article-more-link">
-          <a  href="/2017/12/07/1/#more">阅读全文 >></a>
+          <a  href="/2017/12/11/1/#more">阅读全文 >></a>
         </p>
       
       <div class="clearfix"></div>
